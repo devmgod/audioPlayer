@@ -21,7 +21,7 @@ const AudioPlayer = ({ tracks }) => {
 
     const [value, setValue] = useState(30);
 
-    const handleChange = ( number ) => {
+    const handleChange = (number) => {
         setValue(number);
     };
     console.log("Leeee================", value);
@@ -55,6 +55,7 @@ const AudioPlayer = ({ tracks }) => {
                 setTrackProgress(audioRef.current.currentTime);
             }
         }, [1000]);
+
     };
 
     const onScrub = (value) => {
@@ -91,11 +92,25 @@ const AudioPlayer = ({ tracks }) => {
     useEffect(() => {
         if (isPlaying) {
             audioRef.current.play();
-            startTimer();
+            clearInterval(intervalRef.current);
+
+            intervalRef.current = setInterval(() => {
+                if (audioRef.current.ended) {
+                    if (trackIndex < tracks.length - 1) {
+                        setTrackIndex(trackIndex + 1);
+                    } else {
+                        setTrackIndex(0);
+                    }
+                } else {
+                    setTrackProgress(audioRef.current.currentTime);
+                }
+            }, [1000]);
         } else {
             audioRef.current.pause();
         }
-    }, [isPlaying]);
+
+        return intervalRef.current;
+    }, [isPlaying, trackIndex, tracks.length]);
 
     // Handles cleanup and setup when changing tracks
     useEffect(() => {
@@ -107,12 +122,22 @@ const AudioPlayer = ({ tracks }) => {
         if (isReady.current) {
             audioRef.current.play();
             setIsPlaying(true);
-            startTimer();
+            intervalRef.current = setInterval(() => {
+                if (audioRef.current.ended) {
+                    if (trackIndex < tracks.length - 1) {
+                        setTrackIndex(trackIndex + 1);
+                    } else {
+                        setTrackIndex(0);
+                    }
+                } else {
+                    setTrackProgress(audioRef.current.currentTime);
+                }
+            }, [1000]);
         } else {
             // Set the isReady ref as true for the next pass
             isReady.current = true;
         }
-    }, [trackIndex]);
+    }, [trackIndex, audioSrc, tracks.length]);
 
     useEffect(() => {
         // Pause and clean up on unmount
@@ -167,7 +192,7 @@ const AudioPlayer = ({ tracks }) => {
             <Box sx={{ width: "100%" }}>
                 <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
                     <VolumeDown />
-                    <Slider aria-label="Volume" value={value} onChange={(e)=>handleChange(e.target.value)} />
+                    <Slider aria-label="Volume" value={value} onChange={(e) => handleChange(e.target.value)} />
                     <VolumeUp />
                 </Stack>
             </Box>
