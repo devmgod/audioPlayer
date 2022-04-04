@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import Slider from '@mui/material/Slider';
 import VolumeDown from '@mui/icons-material/VolumeDown';
 import VolumeUp from '@mui/icons-material/VolumeUp';
+
 /*
  * Read the blog post here:
  * https://letsbuildui.dev/articles/building-an-audio-player-with-react-hooks
@@ -20,11 +21,6 @@ const AudioPlayer = ({ tracks }) => {
     const [isPlaying, setIsPlaying] = useState(false);
 
     const [value, setValue] = useState(30);
-
-    const handleChange = (number) => {
-        setValue(number);
-    };
-    console.log("Leeee================", value);
 
     // Destructure for conciseness
     const { title, artist, color, image, audioSrc } = tracks[trackIndex];
@@ -71,6 +67,12 @@ const AudioPlayer = ({ tracks }) => {
             setIsPlaying(true);
         }
         startTimer();
+    };
+
+    const handleChange = (e, number) => {
+        e.preventDefault();
+        setValue(number);
+        audioRef.current.volume = number / 100;
     };
 
     const toPrevTrack = () => {
@@ -176,12 +178,13 @@ const AudioPlayer = ({ tracks }) => {
                     style={{ background: trackStyling }}
                 />
                 <AudioControls
+                    id="audiovolume"
                     isPlaying={isPlaying}
                     onPrevClick={toPrevTrack}
                     onNextClick={toNextTrack}
                     onPlayPauseClick={setIsPlaying}
+                    volume="0.5"
                 />
-                {/* <input type="range" id="volume-slider" max="100" value="100" /> */}
             </div>
             <Backdrop
                 trackIndex={trackIndex}
@@ -192,7 +195,7 @@ const AudioPlayer = ({ tracks }) => {
             <Box sx={{ width: "100%" }}>
                 <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
                     <VolumeDown />
-                    <Slider aria-label="Volume" value={value} onChange={(e) => handleChange(e.target.value)} />
+                    <Slider aria-label="Volume" value={value} onChange={(e) => handleChange(e, e.target.value)} />
                     <VolumeUp />
                 </Stack>
             </Box>
