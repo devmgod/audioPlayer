@@ -6,7 +6,7 @@ import fifty from "./assets/50-tobylane.m4a";
 import iwonder from "./assets/iwonder-dreamheaven.m4a";
 
 // All of these artists are at https://pixabay.com/music/search/mood/laid%20back/
-export default [
+const tracks = [
   {
     title: "Cali",
     artist: "Wataboi",
@@ -29,3 +29,5 @@ export default [
     color: "#5f9fff",
   },
 ];
+
+export default tracks;
