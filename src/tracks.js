@@ -1,9 +1,9 @@
 import imgSrc from "./assets/artwork.png";
 import imgSrc2 from "./assets/artwork2.png";
 import imgSrc3 from "./assets/artwork3.png";
-import cali from "./assets/cali-wataboi.m4a";
-import fifty from "./assets/50-tobylane.m4a";
-import iwonder from "./assets/iwonder-dreamheaven.m4a";
+import cali from "./assets/TEST.mp3";
+import fifty from "./assets/TEST2.mp3";
+import iwonder from "./assets/TEST3.mp3";
 
 // All of these artists are at https://pixabay.com/music/search/mood/laid%20back/
 const tracks = [

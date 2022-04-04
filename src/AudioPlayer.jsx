@@ -54,7 +54,9 @@ const AudioPlayer = ({ tracks }) => {
 
     };
 
-    const onScrub = (value) => {
+    const onScrub = (value_time) => {
+
+        console.log("Leee=============", value_time);
         // Clear any timers already running
         clearInterval(intervalRef.current);
         audioRef.current.currentTime = value;
@@ -183,7 +185,7 @@ const AudioPlayer = ({ tracks }) => {
                     onPrevClick={toPrevTrack}
                     onNextClick={toNextTrack}
                     onPlayPauseClick={setIsPlaying}
-                    volume="0.5"
+                    volume={value / 100}
                 />
             </div>
             <Backdrop
