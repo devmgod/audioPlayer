@@ -122,6 +122,9 @@
 .logo-title img {
     width: 45px;
 }
+.prev-btn {
+  transform: rotate(180deg);
+}
 
 .App {
   font-family: sans-serif;
