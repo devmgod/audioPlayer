@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactComponent as Play } from "./assets/play-button.svg";
-import { ReactComponent as Pause } from "./assets/pause.svg";
+import { ReactComponent as Pause } from "./assets/pause-btn.svg";
 import { ReactComponent as Next } from "./assets/forward-button.svg";
 import { ReactComponent as Prev } from "./assets/forward-button.svg";
 
