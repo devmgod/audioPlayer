@@ -1,8 +1,8 @@
 import React from "react";
-import { ReactComponent as Play } from "./assets/play-button.svg";
-import { ReactComponent as Pause } from "./assets/pause-btn.svg";
-import { ReactComponent as Next } from "./assets/forward-button.svg";
-import { ReactComponent as Prev } from "./assets/forward-button.svg";
+import { ReactComponent as Play } from "./assets/btn/play.svg";
+import { ReactComponent as Pause } from "./assets/btn/pausa.svg";
+import forward from "./assets/btn/adelante.png";
+import backward from "./assets/btn/atras.png";
 
 const AudioControls = ({
     isPlaying,
@@ -17,7 +17,8 @@ const AudioControls = ({
             aria-label="Previous"
             onClick={onPrevClick}
         >
-            <Prev className="prev-btn" />
+            {/* <Prev className="prev-btn" /> */}
+            <img src={backward} alt="prev" />
         </button>
         {isPlaying ? (
             <button
@@ -44,7 +45,8 @@ const AudioControls = ({
             aria-label="Next"
             onClick={onNextClick}
         >
-            <Next />
+            {/* <Next /> */}
+            <img src={forward} alt="next" />
         </button>
     </div>
 );
