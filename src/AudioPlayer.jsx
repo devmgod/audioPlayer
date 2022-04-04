@@ -59,7 +59,7 @@ const AudioPlayer = ({ tracks }) => {
         console.log("Leee=============", value_time);
         // Clear any timers already running
         clearInterval(intervalRef.current);
-        audioRef.current.currentTime = value;
+        audioRef.current.currentTime = value_time;
         setTrackProgress(audioRef.current.currentTime);
     };
 
