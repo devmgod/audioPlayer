@@ -46,7 +46,12 @@ const AudioPlayer = ({ tracks }) => {
 
         intervalRef.current = setInterval(() => {
             if (audioRef.current.ended) {
-                toNextTrack();
+                // toNextTrack();
+                if (trackIndex < tracks.length - 1) {
+                    setTrackIndex(trackIndex + 1);
+                } else {
+                    setTrackIndex(0);
+                }
             } else {
                 setTrackProgress(audioRef.current.currentTime);
             }
@@ -77,21 +82,25 @@ const AudioPlayer = ({ tracks }) => {
         audioRef.current.volume = number / 100;
     };
 
-    const toPrevTrack = () => {
-        if (trackIndex - 1 < 0) {
-            setTrackIndex(tracks.length - 1);
-        } else {
-            setTrackIndex(trackIndex - 1);
-        }
+    const toPrevTrack = (x) => {
+        // if (trackIndex - 1 < 0) {
+        //     setTrackIndex(tracks.length - 1);
+        // } else {
+        //     setTrackIndex(trackIndex - 1);
+        // }
+        // clearInterval(intervalRef.current);
+        console.log(x);
+        audioRef.current.currentTime += Number(x);
+        setTrackProgress(audioRef.current.currentTime);
     };
 
-    const toNextTrack = () => {
-        if (trackIndex < tracks.length - 1) {
-            setTrackIndex(trackIndex + 1);
-        } else {
-            setTrackIndex(0);
-        }
-    };
+    // const toNextTrack = () => {
+    //     if (trackIndex < tracks.length - 1) {
+    //         setTrackIndex(trackIndex + 1);
+    //     } else {
+    //         setTrackIndex(0);
+    //     }
+    // };
 
     useEffect(() => {
         if (isPlaying) {
@@ -114,7 +123,7 @@ const AudioPlayer = ({ tracks }) => {
         }
 
         return intervalRef.current;
-    }, [isPlaying, trackIndex, tracks.length]);
+    }, [isPlaying, trackIndex, tracks.length, trackProgress]);
 
     // Handles cleanup and setup when changing tracks
     useEffect(() => {
@@ -182,8 +191,9 @@ const AudioPlayer = ({ tracks }) => {
                 <AudioControls
                     id="audiovolume"
                     isPlaying={isPlaying}
-                    onPrevClick={toPrevTrack}
-                    onNextClick={toNextTrack}
+                    onPrevClick={() => toPrevTrack(-10)}
+                    onNextClick={() => toPrevTrack(10)}
+                    // onNextClick={toNextTrack}
                     onPlayPauseClick={setIsPlaying}
                     volume={value / 100}
                 />
