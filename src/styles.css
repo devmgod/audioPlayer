@@ -47,7 +47,7 @@
     display: block;
     margin: auto;
     height: 287px;
-    width: 310px;
+    width: 100%;
  }
   
   .track-info {
@@ -112,6 +112,19 @@
     }
     to {
       filter: hue-rotate(360deg);
+    }
+  }
+
+  @media screen and (max-width: 300px) {
+    /* .next{
+      display: none;
+    }
+    .prev {
+      display: none;
+    } */
+    .audio-controls {
+      display: flex;
+      flex-direction: column;
     }
   }
   
